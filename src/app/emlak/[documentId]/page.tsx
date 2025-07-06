@@ -4,13 +4,7 @@ import { notFound } from "next/navigation";
 import { getEmlakDetayByDocumentId } from "@/lib/api";
 import EmlakDetayClient from "./EmlakDetayClient";
 
-interface PageProps {
-  params: {
-    documentId: string;
-  };
-}
-
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params }: { params: any }) {
   const emlak = await getEmlakDetayByDocumentId(params.documentId);
 
   if (!emlak) {
