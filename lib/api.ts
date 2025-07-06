@@ -40,13 +40,15 @@ export async function getEmlaklar() {
 }
 
 export async function getKategoriler() {
-  const res = await fetch(`${API_BASE}/kategoris?populate[emlaks]=true`);
+  const res = await fetch(`${API_BASE}/kategoris`, {
+    cache: "no-store", // 💥 Önemli
+  });
   const data = await res.json();
 
   return data.data.map((item: any) => ({
     id: item.id,
     ad: item.ad,
-    slug: item.slug, // <== buraya dikkat
+    slug: item.slug,
   }));
 }
 
