@@ -2,13 +2,8 @@ import { getEmlaklar } from "@/lib/api";
 import Breadcrumbs from "@/src/components/Breadcrumbs";
 import KategoriPageClient from "./KategoriPageClient";
 
-export default async function KategoriPage({
-  params,
-}: {
-  params: { slug: string } | Promise<{ slug: string }>;
-}) {
-  const resolvedParams = params instanceof Promise ? await params : params;
-  const slug = resolvedParams.slug?.toLowerCase();
+export default async function KategoriPage({ params }: any) {
+  const slug = params.slug.toLowerCase();
   const emlaklar = await getEmlaklar();
 
   const filtrelenmis = emlaklar.filter((emlak: any) => {
