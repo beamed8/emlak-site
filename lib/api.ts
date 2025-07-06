@@ -40,7 +40,7 @@ export async function getEmlaklar() {
 }
 
 export async function getKategoriler() {
-  const res = await fetch(`${API_BASE}/kategoris`);
+  const res = await fetch(`${API_BASE}/kategoris?populate[emlaks]=true`);
   const data = await res.json();
 
   return data.data.map((item: any) => ({
@@ -70,7 +70,7 @@ export async function getEmlakDetayByDocumentId(documentId: string) {
     fiyat: emlak.fiyat,
     lokasyon: emlak.lokasyon,
     kategori: emlak.kategori || null,
-    resimler: emlak.resimler.map((img: any) => ({
+    resimler: (emlak.resimler ?? []).map((img: any) => ({
       id: img.id,
       url: img.url.startsWith("http") ? img.url : `${API_URL}${img.url}`,
       alternativeText: img.alternativeText,

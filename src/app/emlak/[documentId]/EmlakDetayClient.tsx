@@ -23,10 +23,6 @@ const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), {
   ssr: false,
 });
 
-// const Leaflet = dynamic(() => import("leaflet"), { ssr: false });
-
-import { MapPin as MapPinIcon } from "lucide-react";
-
 export default function EmlakDetayClient({ emlak }: { emlak: any }) {
   const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(
     null
@@ -38,13 +34,13 @@ export default function EmlakDetayClient({ emlak }: { emlak: any }) {
     lat >= 35.8 && lat <= 42.1 && lon >= 25.7 && lon <= 44.8;
 
   useEffect(() => {
-    // Leaflet dinamik importu
     import("leaflet").then((mod) => setL(mod));
   }, []);
 
   useEffect(() => {
     if (!emlak.lokasyon) {
       setLoadingMap(false);
+      setCoords(null);
       return;
     }
 
@@ -74,7 +70,14 @@ export default function EmlakDetayClient({ emlak }: { emlak: any }) {
 
   if (!L) return null; // Leaflet yüklenene kadar boş döndür
 
-  // Leaflet için custom icon tanımı
+  // Placeholder resim url’si (public klasöründe olmalı)
+  const placeholderImage = "/placeholder.jpg";
+
+  // Eğer resim yoksa placeholder kullan
+  const imagesToShow =
+    emlak.resimler?.length > 0 ? emlak.resimler : [{ url: placeholderImage }];
+
+  // Leaflet custom icon
   const customIcon = new L.DivIcon({
     html: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
     className: "",
@@ -103,19 +106,17 @@ export default function EmlakDetayClient({ emlak }: { emlak: any }) {
         <div className="flex flex-wrap items-center gap-4 text-gray-600">
           <div className="flex items-center gap-2">
             <Tag className="w-5 h-5 text-indigo-500" />
-            <span className="font-medium">{emlak.kategori?.ad}</span>
+            <span className="font-medium">{emlak.kategori?.ad || "-"}</span>
           </div>
           <div className="flex items-center gap-2">
             <MapPin className="w-5 h-5 text-red-500" />
-            <span>{emlak.lokasyon}</span>
+            <span>{emlak.lokasyon || "-"}</span>
           </div>
         </div>
 
-        {emlak.resimler.length > 0 && (
-          <div className="rounded-lg overflow-hidden shadow">
-            <EmlakCarousel images={emlak.resimler} />
-          </div>
-        )}
+        <div className="rounded-lg overflow-hidden shadow">
+          <EmlakCarousel images={imagesToShow} />
+        </div>
 
         <div className="bg-gray-50 p-6 rounded-xl shadow text-gray-800 leading-relaxed text-lg">
           {emlak.aciklama}

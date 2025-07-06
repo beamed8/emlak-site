@@ -12,8 +12,14 @@ interface EmlakCarouselProps {
 export default function EmlakCarousel({ images }: EmlakCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  // Eğer resim yoksa placeholder ekle
+  const finalImages =
+    images.length === 0
+      ? [{ url: "/placeholder.jpg" }] // public klasöründe bir placeholder.jpg olmalı
+      : images;
+
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
-    loop: images.length > 1, // loop sadece 2+ görselde olsun
+    loop: finalImages.length > 1,
     initial: 0,
     slideChanged(s) {
       setCurrentSlide(s.track.details.rel);
@@ -25,17 +31,13 @@ export default function EmlakCarousel({ images }: EmlakCarouselProps) {
   return (
     <div className="relative w-full max-w-4xl mx-auto">
       <div ref={sliderRef} className="keen-slider" style={{ height: "500px" }}>
-        {images.map((img, idx) => (
+        {finalImages.map((img, idx) => (
           <div
             key={idx}
             className="keen-slider__slide flex items-center justify-center"
           >
             <img
-              src={`${
-                img.url.startsWith("http")
-                  ? img.url
-                  : `http://localhost:1337${img.url}`
-              }`}
+              src={img.url}
               alt={`Resim ${idx + 1}`}
               className="max-h-full max-w-full object-contain"
               style={{ margin: "0 auto" }}
@@ -44,7 +46,7 @@ export default function EmlakCarousel({ images }: EmlakCarouselProps) {
         ))}
       </div>
 
-      {images.length > 1 && (
+      {finalImages.length > 1 && (
         <>
           <button
             aria-label="Önceki"
