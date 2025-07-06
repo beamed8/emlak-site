@@ -1,12 +1,12 @@
 import { getEmlaklar } from "@/lib/api";
 import Breadcrumbs from "@/src/components/Breadcrumbs";
-import KategoriPageClient from "./KategoriPageClient"; // <-- yeni component
+import KategoriPageClient from "./KategoriPageClient"; // <-- client component
 
-interface KategoriPageProps {
+export default async function KategoriPage({
+  params,
+}: {
   params: { slug: string };
-}
-
-export default async function KategoriPage({ params }: KategoriPageProps) {
+}) {
   const slug = params.slug?.toLowerCase();
   const emlaklar = await getEmlaklar();
 
