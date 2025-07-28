@@ -10,13 +10,21 @@ async function getProperty(slug: string) {
 }
 
 export async function generateStaticParams() {
-  const res = await fetch(`${API_URL}/api/properties`);
-  const data = await res.json();
-  return data.data.map((item: any) => ({ slug: item.attributes.slug }));
+  try {
+    const res = await fetch(`${API_URL}/api/properties`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    if (!data.data || !Array.isArray(data.data)) return [];
+    return data.data.map((item: any) => ({ slug: item.attributes.slug }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
 }
 
-export default async function PropertyDetailPage({ params }: { params: { slug: string } }) {
-  const property = await getProperty(params.slug);
+export default async function PropertyDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const property = await getProperty(resolvedParams.slug);
   if (!property) return notFound();
 
   const { title, description, image } = property.attributes;

@@ -6,10 +6,10 @@ import Link from "next/link";
 import { Icon } from '@iconify/react'
 
 type Props = {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 };
 
-export async function generateMetadata({ params }: any) {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const data = await params;
     const posts = getAllPosts(["title", "date", "excerpt", "coverImage", "slug"]);
     const post = getPostBySlug(data.slug, [
@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: any) {
     }
 }
 
-export default async function Post({ params }: any) {
+export default async function Post({ params }: Props) {
     const data = await params;
     const posts = getAllPosts(["title", "date", "excerpt", "coverImage", "slug"]);
     const post = getPostBySlug(data.slug, [

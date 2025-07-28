@@ -1,6 +1,6 @@
 import HeroSub from "@/components/shared/HeroSub";
 import PropertiesListing from "@/components/Properties/PropertyList";
-import React from "react";
+import React, { Suspense } from "react";
 import { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Property List | Homely",
@@ -14,7 +14,9 @@ const page = () => {
                 description="İlham veren tasarımlara sahip mekanları keşfedin. Zarafet ve konforu bir arada sunan, seçkin yaşam alanlarımızı inceleyin."
                 badge="Mekanlar"
             />
-            <PropertiesListing />
+            <Suspense fallback={<div className="flex justify-center items-center py-20">Loading...</div>}>
+                <PropertiesListing />
+            </Suspense>
         </>
     );
 };
