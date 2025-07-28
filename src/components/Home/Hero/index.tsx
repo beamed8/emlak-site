@@ -67,7 +67,7 @@ const Hero: React.FC = () => {
         }}
         data-darkreader-ignore
       >
-        <source src="https://videos.pexels.com/video-files/4255438/4255438-uhd_2732_1440_25fps.mp4" type="video/mp4" />
+        <source src="https://videos.pexels.com/video-files/9810700/9810700-uhd_2732_1440_25fps.mp4" type="video/mp4" />
       </video>
       {/* Siyah transparan katman */}
       <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10" />
