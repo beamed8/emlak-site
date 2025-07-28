@@ -27,7 +27,7 @@ const FAQ: React.FC = () => {
                             <Icon icon="ph:house-simple-fill" className="text-2xl text-primary " />
                             Sıkça Sorulan Sorular
                         </p>
-                        <h2 className='lg:text-52 text-40 leading-[1.2] font-medium text-dark dark:text-white'>
+                        <h2 className='text-3xl lg:text-4xl xl:text-5xl leading-tight font-bold text-dark dark:text-white'>
                             Mekan Kiralama Hakkında Merak Ettikleriniz
                         </h2>
                         <p className='text-dark/50 dark:text-white/50 pr-20'>

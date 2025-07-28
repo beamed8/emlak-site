@@ -5,6 +5,7 @@ import { Search } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { getKategoriler } from '@/lib/api'
+import Link from 'next/link'
 
 const Hero: React.FC = () => {
   const router = useRouter();
@@ -46,12 +47,25 @@ const Hero: React.FC = () => {
     <section className='!py-0 relative overflow-hidden min-h-screen flex items-center'>
       {/* Video arka plan */}
       <video
-        className="absolute top-0 left-0 w-full h-full object-cover -z-20"
+        className="hero-video dark-reader-protected absolute top-0 left-0 w-full h-full object-cover -z-20"
         autoPlay
         loop
         muted
         playsInline
         aria-label="Video background showing luxurious real estate"
+        style={{ 
+          filter: 'none',
+          opacity: 1,
+          visibility: 'visible' as const,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          zIndex: -20
+        }}
+        data-darkreader-ignore
       >
         <source src="https://videos.pexels.com/video-files/7233782/7233782-hd_1920_1080_25fps.mp4" type="video/mp4" />
       </video>
@@ -59,7 +73,7 @@ const Hero: React.FC = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10" />
       <div className='w-full flex flex-col items-center justify-center h-full'>
         <div className='container max-w-4xl mx-auto px-5 flex flex-col items-center justify-center h-full relative z-10'>
-          <h1 className='text-white dark:text-dark text-4xl sm:text-6xl font-semibold text-center drop-shadow-lg mb-8 max-w-5xl'>
+          <h1 className='text-white dark:text-white text-4xl sm:text-5xl lg:text-6xl font-bold text-center drop-shadow-2xl mb-8 max-w-5xl leading-tight tracking-tight'>
             Aradığın mekanı bul, etkinliğini planla.
           </h1>
           <form
@@ -81,6 +95,13 @@ const Hero: React.FC = () => {
               Ara
             </button>
           </form>
+          
+          {/* Tüm mekanları gör butonu */}
+          <div className="mt-6">
+            <Link href="/properties" className="inline-block py-3 px-6 bg-white/20 backdrop-blur-sm border border-white/30 text-white rounded-full font-semibold hover:bg-white/30 transition-all duration-300">
+              Tüm mekanları gör
+            </Link>
+          </div>
         </div>
       </div>
     </section>

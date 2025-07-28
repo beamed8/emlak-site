@@ -76,8 +76,8 @@ const FeaturedProperty: React.FC = () => {
                 <Icon icon="ph:house-simple-fill" className="text-2xl text-primary " />
                 Öne Çıkan Kategoriler
               </p>
-              <h2 className="lg:text-52 text-40 font-medium text-dark dark:text-white">
-                Organizasyonlara Uygun Mekanlar
+              <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-dark dark:text-white leading-tight">
+                Organizasyonunuza en uygun mekanları bulun
               </h2>
               <div className="flex flex-wrap gap-2.5 mt-2">
                 <span className="bg-primary/10 text-primary px-4 py-2 rounded-full text-base font-medium">Malikaneler</span>

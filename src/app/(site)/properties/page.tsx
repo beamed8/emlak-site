@@ -3,15 +3,15 @@ import PropertiesListing from "@/components/Properties/PropertyList";
 import React, { Suspense } from "react";
 import { Metadata } from "next";
 export const metadata: Metadata = {
-    title: "Property List | Homely",
+    title: "Mekanlar | Denge Mekan Menajerlik",
 };
 
 const page = () => {
     return (
         <>
             <HeroSub
-                title="Mekanlar"
-                description="İlham veren tasarımlara sahip mekanları keşfedin. Zarafet ve konforu bir arada sunan, seçkin yaşam alanlarımızı inceleyin."
+                title="Tüm Mekanlarımız"
+                description="Etkinliğiniz için mükemmel mekanı bulun. Düğünlerden toplantılara, doğum günlerinden kurumsal etkinliklere kadar her organizasyon için uygun mekan seçeneklerimizi keşfedin."
                 badge="Mekanlar"
             />
             <Suspense fallback={<div className="flex justify-center items-center py-20">Loading...</div>}>

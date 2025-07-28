@@ -121,3 +121,50 @@ section {
 .blog-details p {
   @apply text-dark dark:text-white text-xm leading-[1.2]
 }
+
+/* Dark Reader Protection */
+.dark-reader-protected {
+  filter: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Dark Reader Protection - Daha güçlü koruma */
+video.hero-video {
+  filter: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  background: transparent !important;
+  -webkit-filter: none !important;
+  transform: none !important;
+  mix-blend-mode: normal !important;
+  z-index: -20 !important;
+}
+
+/* Dark Reader tarafından gizlenen videoları zorla göster */
+html[data-darkreader-mode] video.hero-video,
+html[data-darkreader-scheme] video.hero-video,
+body[data-darkreader-mode] video.hero-video,
+body[data-darkreader-scheme] video.hero-video {
+  filter: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  background: transparent !important;
+  -webkit-filter: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* Dark Reader'ın video elementlerini tamamen hedeflemesini engelle */
+video[data-darkreader-inline-fill],
+video[data-darkreader-inline-bgcolor],
+video[data-darkreader-inline-bgimage] {
+  filter: none !important;
+  background: transparent !important;
+  opacity: 1 !important;
+}

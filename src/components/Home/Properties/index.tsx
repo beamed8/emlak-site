@@ -2,6 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import PropertyCard from './Card/Card'
+import Link from 'next/link'
 // import { propertyHomes } from '@/app/api/propertyhomes' ❌ bunu kaldır
 import { getEmlaklar } from '@/lib/api' // ✅ senin Strapi api fonksiyonun
 import { useEffect, useState } from 'react'
@@ -34,7 +35,7 @@ const Properties: React.FC = () => {
               Mekanlar
             </p>
           </div>
-          <h2 className='text-40 lg:text-52 font-medium text-black dark:text-white text-center tracking-tight leading-11 mb-2'>
+          <h2 className='text-3xl lg:text-4xl xl:text-5xl font-bold text-black dark:text-white text-center tracking-tight leading-tight mb-2'>
             Organizasyonunuza en uygun mekanları bulun
           </h2>
           <p className='text-xm font-normal text-black/50 dark:text-white/50 text-center'>
@@ -59,6 +60,14 @@ const Properties: React.FC = () => {
               }} />
             </div>
           ))}
+        </div>
+
+        {/* Tüm Mekanları Gör Butonu */}
+        <div className="flex justify-center mt-12">
+          <Link href="/properties" className="inline-flex items-center gap-3 py-4 px-8 bg-primary hover:bg-primary/90 text-white rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <Icon icon="ph:house-simple-fill" className="text-xl" />
+            Tüm Mekanları Gör
+          </Link>
         </div>
       </div>
     </section>
